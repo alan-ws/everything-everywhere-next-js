@@ -1,11 +1,32 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import styles from "../styles/Home.module.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export async function getStaticProps({ params }: any) {
+  await new Promise((r) => setTimeout(r, 500));
+  const { slug } = params;
+  const txt =
+    slug > 3 ? `Page ${slug} gen on-dem` : `Page ${slug} pre-ren @ build`;
+  return {
+    props: {
+      txt,
+    },
+  };
+}
+export async function getStaticPaths() {
+  const p = ["1", "2", "3"];
+  const paths = p.map((pp) => ({ params: { slug: pp } }));
+  console.log(paths);
+  return {
+    paths,
+    fallback: "blocking",
+  };
+}
+
+export default function Home({ txt }: any) {
   return (
     <>
       <Head>
@@ -16,17 +37,14 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
+          <p>{txt}</p>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
+              By{" "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -119,5 +137,5 @@ export default function Home() {
         </div>
       </main>
     </>
-  )
+  );
 }
