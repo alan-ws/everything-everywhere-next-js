@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && find ./.next/static/chunks/ -name '*.js.map' -print",
+    "build": "next build && find ./.next/static -name '*.js.map' -delete",
     "start": "next start",
     "lint": "next lint"
   },
