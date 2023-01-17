@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && find ./.next/static -name '*.js.map' -delete",
+    "build": "next build && datadog-ci --service=my-service --release-version=v1 --minified-path-prefix=https://hostname.com/static/js sourcemaps upload .next/static && find .next/static -name '*.js.map' -delete",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@datadog/datadog-ci": "^2.3.1",
     "@next/font": "13.1.1",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
