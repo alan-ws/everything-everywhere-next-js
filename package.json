@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && datadog-ci --service=my-service --release-version=v1 --minified-path-prefix=https://hostname.com/static/js sourcemaps upload .next/static && find .next/static -name '*.js.map' -delete",
+    "build": "next build && datadog-ci --disable-git --service=my-service --release-version=v1 --minified-path-prefix=https://hostname.com/static/js sourcemaps upload .next/static && find .next/static -name '*.js.map' -delete",
     "start": "next start",
     "lint": "next lint"
   },
